@@ -1,4 +1,4 @@
-name: MQ Scan
+name: IP Scan
 
 on:
   push:
