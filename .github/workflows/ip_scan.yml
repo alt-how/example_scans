@@ -2,11 +2,11 @@ name: IP Scan
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'src/ip/**'    
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'src/ip/**'
   schedule:
