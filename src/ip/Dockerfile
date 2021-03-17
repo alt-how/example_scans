@@ -1,1 +1,1 @@
-FROM difi/integrasjonspunkt:2.1.1
+FROM difi/integrasjonspunkt:latest
