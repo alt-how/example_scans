@@ -1,0 +1,25 @@
+name: MQ Scan
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/mq/**'    
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'src/mq/**'
+  schedule:
+    - cron: '0 8 * * 1,4'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build src/mq/ --file  src/mq/Dockerfile --tag mq:${{github.sha}}
+      
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: mq:${{ github.sha }}
