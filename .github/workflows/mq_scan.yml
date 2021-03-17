@@ -2,11 +2,11 @@ name: MQ Scan
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'src/mq/**'    
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'src/mq/**'
   schedule:
