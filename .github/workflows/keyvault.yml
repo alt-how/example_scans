@@ -1,0 +1,25 @@
+name: Keyvault Scan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/keyvault/**'    
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/keyvault/**'
+  schedule:
+    - cron: '0 8 * * 1,4'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build src/keyvault/ --file  src/keyvault/Dockerfile --tag keyvault:${{github.sha}}
+      
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: keyvault:${{ github.sha }}

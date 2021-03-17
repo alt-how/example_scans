@@ -1,0 +1,25 @@
+name: Controller Scan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/controller/**'    
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/controller/**'
+  schedule:
+    - cron: '0 8 * * 1,4'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build src/controller/ --file  src/controller/Dockerfile --tag controller:${{github.sha}}
+      
+    - uses: Azure/container-scan@v0
+      with:
+        image-name: controller:${{ github.sha }}

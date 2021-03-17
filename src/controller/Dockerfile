@@ -1,0 +1,1 @@
+FROM spvest/azure-keyvault-controller:1.2.1
